@@ -1,2 +1,3 @@
 # Ignore the output file
-a.out
+server
+server.o
