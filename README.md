@@ -35,7 +35,7 @@ Follow these steps to get the server up and running:
 
 1. **Compile the Source Code**
 
-   Use `clang++` to compile the project. If a Makefile is provided, you can run:
+   Use Makefile to compile the project. If a Makefile is provided, you can run:
 
    ```bash
    make
