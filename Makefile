@@ -7,26 +7,35 @@ CXXFLAGS = -std=c++17 -Wall -Wextra -O2
 # Target executable
 TARGET = server
 
-# Source files
-SRC = server.cpp
-
-# Object files
+# Source and object files
+SRC = src/main.cpp
 OBJ = $(SRC:.cpp=.o)
+
+# Library source and object files
+LIB_SRC = lib/string_to_int.cpp
+LIB_OBJ = lib/string_to_int.o
+
+# Library file
+LIB = libstring_to_int.a
 
 # Default target
 all: $(TARGET)
 
-# Link object files to create the executable
-$(TARGET): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJ)
+# Compile library
+$(LIB): $(LIB_OBJ)
+	ar rcs $(LIB) $(LIB_OBJ)
+
+# Link object files and libraries to create the executable
+$(TARGET): $(OBJ) $(LIB)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJ) -L. -lstring_to_int
 
 # Compile source files into object files
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -Iinclude -c $< -o $@
 
 # Clean up build artifacts
 clean:
-	rm -f $(TARGET) $(OBJ)
+	rm -f $(TARGET) $(OBJ) $(LIB) $(LIB_OBJ)
 
 # Phony targets
 .PHONY: all clean
