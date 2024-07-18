@@ -5,14 +5,30 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <unistd.h>
+#include <cstdlib>  // For exit()
 
-#define PORT 8080
+#define DEFAULT_PORT 8080
+#define MAX_PORT 65535
 
-int main() {
+int main(int argc, char *argv[]) {
     int server_fd, new_socket;
     long valread;
     struct sockaddr_in address;
     int addrlen = sizeof(address);
+    int port = DEFAULT_PORT;
+
+    // Check if a port number was provided as an argument
+    if (argc > 1) {
+        try {
+            port = std::stoi(argv[1]);  // Convert argument to integer
+            if (port < 1 || port > MAX_PORT) {
+                throw std::out_of_range("Port out of range");
+            }
+        } catch (...) {
+            std::cerr << "Invalid port number. Using default port " << DEFAULT_PORT << std::endl;
+            port = DEFAULT_PORT;
+        }
+    }
 
     // Creating socket file descriptor
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
@@ -23,7 +39,7 @@ int main() {
     // Setting up the address struct
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
-    address.sin_port = htons(PORT);
+    address.sin_port = htons(port);
 
     // Binding the socket to the address
     if (bind(server_fd, (struct sockaddr *)&address, sizeof(address)) < 0) {
@@ -37,7 +53,7 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
-    std::cout << "Server is listening on port " << PORT << std::endl;
+    std::cout << "Server is listening on port " << port << std::endl;
 
     while (true) {
         // Accepting an incoming connection
