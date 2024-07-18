@@ -6,39 +6,10 @@
 #include <netinet/in.h>
 #include <unistd.h>
 #include <cstdlib>  // For exit()
+#include "string_to_int.h"
 
 #define DEFAULT_PORT 8080
 #define MAX_PORT 65535
-
-int stringToInt(const char *str) {
-    int result = 0;
-    int sign = 1;
-    int i = 0;
-
-    // Handle empty string
-    if (str[i] == '\0') {
-        throw "Empty string";
-    }
-
-    // Check for optional sign
-    if (str[i] == '-') {
-        sign = -1;
-        i++;
-    } else if (str[i] == '+') {
-        i++;
-    }
-
-    // Convert each character to the corresponding digit
-    while (str[i] != '\0') {
-        if (str[i] < '0' || str[i] > '9') {
-            throw "Invalid character in string";
-        }
-        result = result * 10 + (str[i] - '0');
-        i++;
-    }
-
-    return sign * result;
-}
 
 int main(int argc, char *argv[]) {
     int server_fd, new_socket;
