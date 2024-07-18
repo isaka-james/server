@@ -41,14 +41,6 @@ Follow these steps to get the server up and running:
    make
    ```
 
-   Alternatively, you can compile directly using `clang++`:
-
-   ```bash
-   clang++ -o server main.cpp
-   ```
-
-   This command assumes that your main source file is named `main.cpp`. Adjust the filename as necessary.
-
 ### Running the Server
 
 1. **Start the Server**
@@ -60,6 +52,7 @@ Follow these steps to get the server up and running:
    ```
 
    The server will start and listen on port 8080.
+   If you want to run the server on your custom port then just run `./server <PORT NUMBER>`
 
 2. **Access the Server**
 
@@ -101,4 +94,3 @@ This project is licensed under the [MIT License](LICENSE).
 ## Contact
 
 For any questions or further information, please contact [Isaka James](https://x.com/isakajamess).
-
