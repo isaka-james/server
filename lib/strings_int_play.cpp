@@ -1,5 +1,7 @@
 // lib/string_to_int.cpp
-#include "string_to_int.h"
+#include "strings_int_play.h"
+#include <string>
+#include <cstring>
 
 int stringToInt(const char *str) {
     int result = 0;
@@ -29,4 +31,28 @@ int stringToInt(const char *str) {
     }
 
     return sign * result;
+}
+
+// Function to get the length of a string as an integer
+int getStringLength(const std::string& str) {
+    int length = 0;
+    for (char c : str) {
+        ++length;
+    }
+    return length;
+}
+
+std::string intToString(int number) {
+    if (number == 0) return "0";
+    std::string result;
+    bool isNegative = number < 0;
+    if (isNegative) number = -number;
+    
+    while (number > 0) {
+        result.insert(result.begin(), '0' + number % 10);
+        number /= 10;
+    }
+
+    if (isNegative) result.insert(result.begin(), '-');
+    return result;
 }

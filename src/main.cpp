@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <cstdlib>  // For exit()
 #include <ctime>    // For generating Date header
-#include "string_to_int.h"
+#include "strings_int_play.h"
 
 #define DEFAULT_PORT 8080
 #define MAX_PORT 65535
@@ -83,11 +83,11 @@ int main(int argc, char *argv[]) {
         std::string response =
             "HTTP/1.1 200 OK\r\n"
             "Content-Type: text/html\r\n"
-            "Content-Length: " + std::to_string(html.length()) + "\r\n"
+            "Content-Length: " +intToString(getStringLength(html)) + "\r\n"
             "Vary: Accept-Encoding\r\n"
             "X-Content-Type-Options: nosniff\r\n"
             "Strict-Transport-Security: max-age=31536000; includeSubDomains\r\n"
-            "Server: IsakaJames/1.0\r\n"
+            "Server: IsakaJames\r\n"
             "Date: " + currentTime + "\r\n"
             "Pragma: no-cache\r\n"
             "Cache-Control: no-cache, no-store, must-revalidate\r\n"

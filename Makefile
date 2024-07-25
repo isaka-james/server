@@ -1,4 +1,4 @@
-# Makefile for Server Project
+# Makefile for IsakaJames Server Project
 
 # Compiler and flags
 CXX = clang++
@@ -12,11 +12,11 @@ SRC = src/main.cpp
 OBJ = $(SRC:.cpp=.o)
 
 # Library source and object files
-LIB_SRC = lib/string_to_int.cpp
-LIB_OBJ = lib/string_to_int.o
+LIB_SRC = lib/strings_int_play.cpp
+LIB_OBJ = lib/strings_int_play.o
 
 # Library file
-LIB = libstring_to_int.a
+LIB = libstrings_play.a
 
 # Default target
 all: $(TARGET)
@@ -27,7 +27,7 @@ $(LIB): $(LIB_OBJ)
 
 # Link object files and libraries to create the executable
 $(TARGET): $(OBJ) $(LIB)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJ) -L. -lstring_to_int
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJ) -L. -lstrings_play
 
 # Compile source files into object files
 %.o: %.cpp
