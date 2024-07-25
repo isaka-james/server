@@ -9,7 +9,7 @@
 #include <ctime>    // For generating Date header
 #include "strings_int_play.h"
 
-#define DEFAULT_PORT 8080
+#define DEFAULT_PORT 80
 #define MAX_PORT 65535
 
 std::string getCurrentTime() {
