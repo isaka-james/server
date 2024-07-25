@@ -6,10 +6,19 @@
 #include <netinet/in.h>
 #include <unistd.h>
 #include <cstdlib>  // For exit()
+#include <ctime>    // For generating Date header
 #include "string_to_int.h"
 
 #define DEFAULT_PORT 8080
 #define MAX_PORT 65535
+
+std::string getCurrentTime() {
+    char buffer[100];
+    std::time_t now = std::time(0);
+    std::tm *gmtm = std::gmtime(&now);
+    std::strftime(buffer, sizeof(buffer), "%a, %d %b %Y %H:%M:%S GMT", gmtm);
+    return std::string(buffer);
+}
 
 int main(int argc, char *argv[]) {
     int server_fd, new_socket;
@@ -70,7 +79,19 @@ int main(int argc, char *argv[]) {
 
         // Preparing the response
         std::string html = "<html><body><h1>Hello, World!</h1></body></html>";
-        std::string response = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\nContent-Length: " + std::to_string(html.length()) + "\r\n\r\n" + html;
+        std::string currentTime = getCurrentTime();
+        std::string response =
+            "HTTP/1.1 200 OK\r\n"
+            "Content-Type: text/html\r\n"
+            "Content-Length: " + std::to_string(html.length()) + "\r\n"
+            "Vary: Accept-Encoding\r\n"
+            "X-Content-Type-Options: nosniff\r\n"
+            "Strict-Transport-Security: max-age=31536000; includeSubDomains\r\n"
+            "Server: IsakaJames/1.0\r\n"
+            "Date: " + currentTime + "\r\n"
+            "Pragma: no-cache\r\n"
+            "Cache-Control: no-cache, no-store, must-revalidate\r\n"
+            "\r\n" + html;
 
         // Sending the response
         write(new_socket, response.c_str(), response.length());
