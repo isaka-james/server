@@ -1,4 +1,4 @@
-# IsakaJames\1.0 Server
+# Isaka\1.0 Server
 
 ## Overview
 

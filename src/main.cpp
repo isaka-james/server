@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    std::cout << "Server is listening on port " << port << std::endl;
+    std::cout << "Isaka is listening on port ::" << port << std::endl;
 
     while (true) {
         // Accepting an incoming connection
@@ -87,7 +87,7 @@ int main(int argc, char *argv[]) {
             "Vary: Accept-Encoding\r\n"
             "X-Content-Type-Options: nosniff\r\n"
             "Strict-Transport-Security: max-age=31536000; includeSubDomains\r\n"
-            "Server: IsakaJames\r\n"
+            "Server: Isaka\r\n"
             "Date: " + currentTime + "\r\n"
             "Pragma: no-cache\r\n"
             "Cache-Control: no-cache, no-store, must-revalidate\r\n"
