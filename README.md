@@ -2,6 +2,10 @@
 
 ## Overview
 
+<p>
+  <img src="https://komarev.com/ghpvc/?username=isaka-http&label=Isaka%20Server&color=0e75b6&style=flat" alt="since 04 Sep,2024" />
+</p>
+
 This project provides a basic server implementation that handles incoming connections and serves a simple HTML response. Currently, the server returns a "Hello, World!" message when accessed. Future versions will include additional features and enhancements.
 
 ## Getting Started
